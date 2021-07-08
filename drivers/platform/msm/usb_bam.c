@@ -1307,12 +1307,13 @@ retry:
 
 	       pipe_connect->enabled = false;
 	       spin_lock(&ctx->usb_bam_lock);
-		if (ctx->pipes_enabled_per_bam == 0)
+		if (ctx->pipes_enabled_per_bam == 0){
 			log_event_err("%s: wrong pipes enabled counter for bam=%d\n",
 				 __func__, pipe_connect->bam_type);
-		else
-			ctx->pipes_enabled_per_bam -= 1;
-			spin_unlock(&ctx->usb_bam_lock);
+		} else {
+		ctx->pipes_enabled_per_bam -= 1;
+		}
+		spin_unlock(&ctx->usb_bam_lock);
 	}
 
 	pipe_connect->ipa_clnt_hdl = -1;
